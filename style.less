@@ -1,0 +1,99 @@
+// Define variables and able to resue and be called multiple times
+@background-color: #ffffff;
+@text-color: #1A237E;
+
+p{
+  background-color: @background-color;
+  color: @text-color;
+  padding: 15px;
+}
+
+ul{
+  background-color: @background-color;
+}
+
+li{
+  color: @text-color;
+}
+
+// Mixins
+// Use an existing class or ids and apply all of its styles to another selector
+#circle{
+  background-color: #4CAF50;
+  border-radius: 100%;
+}
+
+#small-circle{
+  width: 50px;
+  height: 50px;
+  #circle
+}
+
+#big-circle{
+  width: 100px;
+  height: 100px;
+  #circle
+}
+
+// Receive parameters or add an argument
+#circle(@size: 25px){
+  background-color: #4CAF50;
+  border-radius: 100%;
+
+  width: @size;
+  height: @size;
+}
+
+#small-circle{
+  #circle // regular circle by using default setting
+}
+
+#big-circle{
+  #circle(100px) // receive parameter
+}
+
+// Nesting, avoid conflicts
+ul{
+  background-color: #03A9F4;
+  padding: 10px;
+  list-style: none;
+
+  li{
+    background-color: #fff;
+    border-radius: 3px;
+    margin: 10px 0;
+  }
+}
+
+// Operations
+@div-width: 100px;
+@color: #03A9F4;
+
+div{
+  height: 50px;
+  display: inline-block;
+}
+
+#left{
+  width: @div-width;
+  background-color: @color - 100;
+}
+
+#right{
+  width: @div-width * 2;
+  background-color: @color;
+}
+
+// Functions
+// fadeout decreases the opacity of a color
+@var: #004590;
+
+div{
+  height: 50px;
+  width: 50px;
+  background-color: @var;
+
+  &:hover{
+    background-color: fadeout(@var, 50%)
+  }
+}
